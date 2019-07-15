@@ -1,0 +1,52 @@
+<table class="table table-hover table-dark">
+    <thead>
+      <tr>
+        <!--th scope="col">#</th>-->
+        <th scope="col">FROM</th>
+        <th scope="col">TO</th>
+        <th scope="col">Mensaje</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+               <td> <div *ngFor="let mensaje of mensajes">
+                  {{mensaje.from}}
+                 </div></td>
+        <td> <div *ngFor="let mensaje of mensajes">
+       {{mensaje.to | uppercase}}
+      </div></td>
+      <td> <div *ngFor="let mensaje of mensajes">
+          {{mensaje.mensaje | uppercase}}
+         </div></td>
+  
+      </tr>
+      
+    </tbody>
+  </table>
+<br>
+<form  novalidate>
+    <div class="form-group col-md-2" >
+     <label >FROM</label>
+     <input type="text" id="from" name="from" class="form-control" 
+     [(ngModel)]="mensaje.from" placeholder="FROM">
+  </div>
+  
+   <div class="form-group col-md-2">
+     <label >TO</label>
+     <input type="text" id="to" name="to" class="form-control" 
+     [(ngModel)]="mensaje.to" placeholder="TO">
+   </div>
+  
+   <div class="form-group col-md-6">
+     <label >Mensaje</label>
+     <input type="text" id="mensaje" name="mensaje" class="form-control" 
+     [(ngModel)]="mensaje.mensaje" placeholder="mensaje">
+   </div>
+  
+  <div class="form-group">
+  <button (click)="this.agregarusuario()"
+  class="btn btn btn-outline-dark btn-lg">Agregar</button>
+  </div>
+  </form>
+  
