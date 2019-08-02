@@ -1,0 +1,28 @@
+<form  novalidate>
+  <div class="form-group col-md-6" >
+   <!-- <div *ngFor="let us of usuarioyo">
+   <input type="text" id="miid" name="miid" class="form-control" 
+   [(ngModel)]="us.id" value="us.id" >
+   
+  </div> -->
+  <input type="text" id="miid" name="miid" class="form-control" 
+  [(ngModel)]="miid" type="hidden">
+
+</div>
+ <div class="form-group col-md-6">
+   <label >Email del amigo</label>
+
+   <input type="text" id="apellido" name="apellido" class="form-control" 
+   [(ngModel)]="email" placeholder="Email">
+ </div>
+
+<div class="form-group">
+<button (click)="this.agregaramigo()"
+class="btn btn btn-outline-dark btn-lg">Agregar</button>
+</div>
+</form>
+
+
+
+
+

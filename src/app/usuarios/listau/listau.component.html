@@ -2,55 +2,123 @@
 <table class="table table-hover table-dark">
   <thead>
     <tr>
-      <!--th scope="col">#</th>-->
       <th scope="col">ID</th>
       <th scope="col">Nombre</th>
       <th scope="col">Email</th>
       <th scope="col">Eliminar</th>
-      <th scope="col">Editar</th>
       <th scope="col">Conversar</th>
+      
     </tr>
   </thead>
-  <tbody>
-    
+  <tbody>    
       <tr>
-             <td> <div *ngFor="let usuario of usuarios">
-                {{usuario.id}}
-               </div></td>
-      <td> <div *ngFor="let usuario of usuarios">
+             <td><div *ngFor="let u of usuario">
+                <div *ngFor="let usuario of usuarios">
+                    <div  *ngIf="usuario.userid !=  u.id"> 
+                {{usuario.userid}}
+               </div>
+               </div>
+              </div></td>
+      <td><div *ngFor="let u of usuario">
+         <div *ngFor="let usuario of usuarios">
+            <div  *ngIf="usuario.userid !=  u.id"> 
      {{usuario.username | uppercase}}
-    </div></td>
-    <td> <div *ngFor="let usuario of usuarios">
+    </div>
+    </div>
+  </div></td>
+    <td><div *ngFor="let u of usuario">
+       <div *ngFor="let usuario of usuarios">
+          <div  *ngIf="usuario.userid !=  u.id"> 
         {{usuario.email | uppercase}}
-       </div></td>
+       </div>
+       </div>
+      </div></td>
        
 <td>
+  <div *ngFor="let u of usuario">
     <div *ngFor="let usuario of usuarios">
-        <button (click)='this.eliminarMono(usuario.id)' type="button" class="btn btn-outline-danger btn-sm">
+        <div  *ngIf="usuario.userid !=  u.id"> 
+        <button (click)='this.eliminarMono(usuario.amigoid)' type="button" class="btn btn-outline-danger btn-sm">
             {{usuario.username}}
         </button>
        </div>
+       </div>
+       </div>
   </td>
-
-  <td>
-      <div *ngFor="let usuario of usuarios">
-          <button type="button" (click)='this.editarMono(usuario.id)' class="btn btn-outline-success btn-sm">
-              <!--a href="editar/{{usuario.id}}" class="text-success">{{usuario.nombre}}</a>-->
-              {{usuario.username}}
-          </button>
-         </div>
-    </td>
-
     <td>
+        <div *ngFor="let u of usuario">
       <div *ngFor="let usuario of usuarios">
-          <button type="button" (click)='this.Conversar(usuario.id)' class="btn btn-outline-primary btn-sm">
-              <!--a href="editar/{{usuario.id}}" class="text-success">{{usuario.nombre}}</a>-->
+          <div  *ngIf="usuario.userid !=  u.id"> 
+          <button type="button" (click)='this.Conversar(usuario.userid,u.id,usuario.amigoid)' class="btn btn-outline-primary btn-sm">
               {{usuario.username}}
           </button>
+        </div>
+</div>
          </div>
     </td>
-
-    </tr>
-    
+    </tr>    
   </tbody>
 </table>
+<br>
+
+<table class="table table-hover table-dark">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Nombre del Grupo</th>
+      <th scope="col">Conversar</th>
+    </tr>
+  </thead>
+  <tbody>    
+      <tr>
+             <td>
+               <div *ngFor="let u of usuario">
+                <div *ngFor="let grupo of grupos">
+                {{grupo.amistadgrupoid}}
+               </div>
+              </div>
+            </td>
+      <td>
+          <div *ngFor="let u of usuario">
+              <div *ngFor="let grupo of grupos">
+                  <div  *ngIf="grupo.creadorid !=  u.id"> 
+              {{grupo.nombregrupo}}
+            </div>
+              <div  *ngIf="grupo.creadorid ==  u.id"> 
+                  {{grupo.nombregrupo}}
+                  <button type="button" (click)='this.editarGrupo(grupo.grupoid)' class="btn btn-outline-success btn-sm">
+                      Agregar amigos
+                  </button>
+                  <!-- <button type="button" (click)='this.eliminarMono(grupo.grupoid)' class="btn btn-outline-danger btn-sm">
+                      Eliminar
+                  </button> -->
+                </div>
+             </div>
+             
+            </div>
+</td>
+
+ <td>
+        <div *ngFor="let u of usuario">
+      <div *ngFor="let grupo of grupos">
+          
+          <button type="button" (click)='this.ConversarGrupo(grupo.nombregrupo,grupo.grupoid)' class="btn btn-outline-primary btn-sm">
+              {{grupo.nombregrupo}}
+          </button>
+        
+</div>
+         </div>
+    </td>
+
+
+    </tr>    
+  </tbody>
+</table>
+
+
+<br>
+<div *ngFor="let u of usuario">
+      <button type="button" (click)='this.editarMono(u.id)' class="btn btn-outline-success btn-sm">
+          {{u.username}}
+      </button>
+     </div>

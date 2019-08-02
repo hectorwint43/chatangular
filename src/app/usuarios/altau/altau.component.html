@@ -17,6 +17,11 @@
    [(ngModel)]="usuario.password" placeholder="contraseña">
  </div>
 
+ <!-- <label >Imagen</label>
+ <form enctype="multipart/form-data">
+  <input id="contraseña" name="contraseña"  [(ngModel)]="usuario.foto" type="file" class="form-control" />
+  </form> -->
+
 <div class="form-group">
 <button (click)="this.agregarusuario()"
 class="btn btn btn-outline-dark btn-lg">Agregar</button>
@@ -29,3 +34,9 @@ class="btn btn btn-outline-dark btn-lg">Agregar</button>
 
 </div>
 </form>
+<br>
+<button (click)="irlogin()" type="button" class="btn btn-outline-success btn-sm">
+  ir al login
+</button>
+
+ 

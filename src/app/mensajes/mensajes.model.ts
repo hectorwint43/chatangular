@@ -3,4 +3,5 @@ export interface Mensaje {
     from: string;
     to: string;
     mensaje: string;
+    tipo: string;
   }

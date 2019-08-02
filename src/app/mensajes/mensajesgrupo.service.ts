@@ -8,12 +8,11 @@ import Ws from '@adonisjs/websocket-client';
 //Se Define la direccion del socket
 //no funciona con esta linea de ws
  const ws = Ws('ws://192.168.43.146:3333');
-  
 
 @Injectable({
   providedIn: 'root'
 })
-export class MensajesService {
+export class MensajesgrupoService {
   private messageSource2 = new BehaviorSubject('');
   currentMessage2  = this.messageSource2.asObservable();
 
@@ -29,14 +28,20 @@ export class MensajesService {
     ws.connect();
    }
 
-
-   suscribir(idchannel)
+   suscribir(idchannel,idgrupo)
    {
     // -----------------------------------------
-     this.socket = ws.subscribe('chat:'+idchannel);
+     this.socket = ws.subscribe('chat:'+idchannel+'_'+idgrupo);
+    // this.socket = ws.subscribe('chat');
+
+   //Evento que sucede al completar la conexion
    this.socket.on('ready', () => {
+     //Emite el mensaje hacia el servidor del socket
+      // socket.emit("message","esta dentro")
    })
+   //Escuchador que espera mensajes desde el servidor
    this.socket.on('message', (event) => {
+     //console.log(event);
      this.changeMessage(event);
    })
    this.socket.on('error', (error) => {
@@ -46,10 +51,10 @@ export class MensajesService {
    })
    }
 
-   suscribir2(idchannel)
+   suscribir2(idchannel,idgrupo)
    {
     // -----------------------------------------
-     this.socket2 = ws.subscribe('chat:'+idchannel);
+     this.socket2 = ws.subscribe('chat:'+idchannel+'_'+idgrupo);
    this.socket2.on('ready', () => {
    })
    this.socket2.on('message', (event) => {
@@ -62,25 +67,10 @@ export class MensajesService {
    })
    }
 
-   getusuariouno(id:number): Observable<Usuario>
+   getparticipantegrupo(idgrupo)
   {
-     
-    return this.httpclient.get<Usuario>(`${this.vari2}/${id}`);
+    return this.httpclient.get("http://192.168.43.146:3333/participantesgrupo/"+idgrupo);
   }
-
-  getmensaje(idcontacto, idusuario): Observable<Mensaje[]>
-  {
-    return this.httpclient.get<Mensaje[]>("http://192.168.43.146:3333/mensaje/"+idusuario+"/"+idcontacto);
-  }
-
-  agregarMensaje(mnsj: Mensaje):Observable<Mensaje[]> {
-    return this.httpclient.post<Mensaje[]>("http://192.168.43.146:3333/mensaje/guardar",mnsj,
-      {
-        headers: new HttpHeaders({
-          'Content-Type': 'application/json'
-        })
-      });
-      }
 
 
       getmensajegrupo(idgrupo, idusuario): Observable<Mensaje[]>
@@ -107,15 +97,15 @@ export class MensajesService {
         };
       }
 
-      
-      enviarMensaje2(datos,idchannel){
+      enviarMensaje2(datos,idchannel,idgrupo){
         // -----------------------------------------
-           ws.getSubscription('chat:'+idchannel).emit('message',datos);
+           ws.getSubscription('chat:'+idchannel+'_'+idgrupo).emit('message',datos);
      }
+  
 
-  enviarMensaje(datos,idchannel){
+  enviarMensaje(datos,idchannel,idgrupo){
     // -----------------------------------------
-       ws.getSubscription('chat:'+idchannel).emit('message',datos);
+       ws.getSubscription('chat:'+idchannel+'_'+idgrupo).emit('message',datos);
  }
 
       changeMessage(msg) {
@@ -125,18 +115,18 @@ export class MensajesService {
       changeMessage2(msg) {
         this.messageSource2.next(msg);
       }
-    
-      cerrar(id)
-      {
-        //  socket = ws.subscribe('chat');
-        this.socket.close();
-        console.log('se cerro');
-      }
 
       cerrar2(id)
       {
         //  socket = ws.subscribe('chat');
         this.socket2.close();
+        console.log('se cerro');
+      }
+    
+      cerrar(id)
+      {
+        //  socket = ws.subscribe('chat');
+        this.socket.close();
         console.log('se cerro');
       }
 

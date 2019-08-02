@@ -1,25 +1,40 @@
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-primary">
   <a class="navbar-brand" [routerLink]="['/']" routerLinkActive="router-link-active">Menu</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    <ul class="navbar-nav">
+  
+      
+      <div *ngFor="let up of usuarioprincipal">
+            <div *ngIf="up.id !=  0"> 
 
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Usuario
+          Usuario {{up.username}}
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="nav-link" [routerLink]="['altausuario']" routerLinkActive="router-link-active">Alta de usuario</a>
-          <div class="dropdown-divider"></div>
-          <a class="nav-link" [routerLink]="['listausuario']" routerLinkActive="router-link-active">lista de usuarios</a>
-          
-        </div>
-      </li>
 
-    </ul>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="nav-link" routerLink="altagrupo" routerLinkActive="router-link-active">Agregar un grupo</a>
+          <a class="nav-link" routerLink="agregaramigo/{{up.id}}" routerLinkActive="router-link-active">Agregar un amigo</a>
+          <div class="dropdown-divider"></div>
+          <!-- <a class="nav-link" href="listausuario/{{up.id}}" routerLinkActive="router-link-active">lista de usuarios</a> -->
+          <a class="nav-link" routerLink="listausuario/{{up.id}}" routerLinkActive="router-link-active">lista de usuarios</a>
+          <!-- [routerLink]="['listausuario/']" routerLinkActive="router-link-active" -->
+
+    </div>
+  </li>
+</ul>
+    <button (click)="cerrarSesion()" type="button" class="btn btn-outline-danger btn-sm">
+      Cerrar secion
+  </button>
+      
+    </div>
+  </div>
+
+    
   </div>
 </nav>
 <div class="container">

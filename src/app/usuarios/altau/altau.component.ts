@@ -10,6 +10,7 @@ import { Usuario } from '../usuarios.model';
 export class AltauComponent implements OnInit {
 
   usuario:Usuario;
+  foto;
   constructor(
     private usuariosservice:UsuariosService
   ) { }
@@ -28,5 +29,9 @@ export class AltauComponent implements OnInit {
     );
     this.usuario = this.usuariosservice.nuevousuario();
      }
+
+     irlogin():void{
+      window.location.replace("login");
+    }
 
 }

@@ -1,3 +1,49 @@
-<p>
-  login works!
-</p>
+<form  form class="border border-light p-5" #form="ngForm">
+  <p class="h4 mb-4 text-center">Iniciar Sesión</p>
+
+  <label >Email</label>
+  <input [(ngModel)] ="email" name="email" required type="email" id="email" class="form-control mb-4" placeholder="Correo">
+
+
+  <label >Contraseña</label>
+  <input [(ngModel)] ="password"  name="password" required type="password" id="password" class="form-control mb-4" placeholder="Contraseña">
+
+  <button (click)="iniciarSesion()" class="btn btn-info btn-block my-4" type="submit" [disabled]="!form.form.valid" data-toggle="modal" data-target="#myModal">Iniciar Sesión</button>
+
+
+</form>
+<br>
+<!-- Trigger the modal with a button -->
+<!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> -->
+
+<!-- Modal  para acceder-->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+          <div *ngIf="usuario ==  null">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+      </div>
+      <div class="modal-body">
+          <div *ngFor="let us of usuario">
+            <div *ngIf="us.id !=  0">
+              <p>Bienvenid@ {{us.username}} </p>  
+            </div>
+          </div>
+          <div *ngIf="usuario ==  null">
+              <p>Usuario o contraseña incorrectos</p>  
+            </div>
+      </div>
+      <div class="modal-footer">
+          <div *ngFor="let us of usuario">
+              <div *ngIf="us.id !=  0">
+          <button (click)="Empezar(us.id)" class="btn btn-info btn-block my-4" type="submit" data-dismiss="modal">
+            Gracias</button>
+          </div>
+            </div>
+      </div>
+    </div>
+  </div>
+</div>

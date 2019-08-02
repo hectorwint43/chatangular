@@ -7,9 +7,12 @@ import { LoginComponent } from './login/login.component';
 import {HttpClientModule } from '@angular/common/http';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { UsuariosService } from './usuarios.service';
+import { AgregaramigosComponent } from './agregaramigos/agregaramigos.component';
+import { AltagrupoComponent } from './altagrupo/altagrupo.component';
+import { AgregaramigogrupoComponent } from './agregaramigogrupo/agregaramigogrupo.component';
 
 @NgModule({
-  declarations: [AltauComponent, ListauComponent, UpdateuComponent, LoginComponent],
+  declarations: [AltauComponent, ListauComponent, UpdateuComponent, LoginComponent, AgregaramigosComponent, AltagrupoComponent, AgregaramigogrupoComponent],
   imports: [
     CommonModule,
     HttpClientModule,

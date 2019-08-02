@@ -1,0 +1,68 @@
+<form  novalidate>
+    <div class="form-group col-md-6" >
+    <input type="text" id="miid" name="miid" class="form-control" 
+    [(ngModel)]="miid" type="hidden">
+    <!-- type="hidden" -->
+  </div>
+  
+   <div class="form-group col-md-6">
+      <!-- <div *ngFor="let u of usuario">
+          <div *ngFor="let usua of usuariosamigo"> 
+              <div  *ngIf="usua.userid !=  u.id"> 
+         <option value="usua.userid"> {{usua.email}}</option>
+        </div>
+      </div>
+     </div> -->
+      
+     
+     <label >Email del amigo</label>
+     <input type="text" id="email" name="email" class="form-control" 
+     [(ngModel)]="email" placeholder="Email">
+    </div>
+
+  
+  <div class="form-group">
+  <button (click)="this.agregargrupo()"
+  class="btn btn btn-outline-dark btn-lg">Agregar</button>
+  </div>
+  </form>
+
+  <br>
+
+<table class="table table-hover table-dark">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">email & username</th>
+    </tr>
+  </thead>
+  <tbody>    
+      <tr>
+             <td>
+               <div *ngFor="let u of usuario">
+                <div *ngFor="let grupo of grupos">
+                {{grupo.amistadgrupoid}}
+               </div>
+              </div>
+            </td>
+      <td>
+          <div *ngFor="let u of usuario">
+              <div *ngFor="let grupo of grupos">
+                  <div  *ngIf="grupo.creadorid !=  u.id"> 
+              {{grupo.username}}  {{grupo.email}}
+            </div>
+              <div  *ngIf="grupo.creadorid ==  u.id"> 
+                  {{grupo.username}}
+                  <button type="button" (click)='this.eliminarMono(grupo.amistadgrupoid)' class="btn btn-outline-danger btn-sm">
+                      Eliminar
+                  </button>
+                </div>
+             </div>
+             
+            </div>
+</td>
+
+ 
+    </tr>    
+  </tbody>
+</table>

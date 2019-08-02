@@ -1,0 +1,183 @@
+
+<div *ngFor="let up of usuarioprincipal">
+      <div *ngIf="this.siescribeon2 != ''">  
+          <div *ngIf="this.siescribeon2 != 'false'">  
+              <h1>estan escribiendo...</h1>
+              </div>
+            </div>      
+    <br>
+  <div id="contenido">
+  <div *ngFor="let mensaje of mensajes">
+      
+      <div *ngIf="mensaje.from !=  up.id">
+          <div *ngFor="let parti of participantegrupo">
+      <div *ngIf="mensaje.from ==  parti.userid"> 
+
+          <div  *ngIf="mensaje.tipo !=  '1'">
+              <div class="speech-bubbleneg" align="right">
+                  <h2>{{parti.username}}  </h2>
+                  <div  *ngIf="mensaje.tipo ==  '2'">
+                      
+                        <img style="    width: 16rem;
+                        border-radius: 1rem;" src="http://192.168.43.146:3333{{mensaje.mensaje}}"
+                         alt="imagen"/>
+                    </div>
+              
+                    <div  *ngIf="mensaje.tipo ==  '3'">
+                         <video controls  src="http://192.168.43.146:3333{{mensaje.mensaje}}"></video>
+                    </div>
+              
+                    <div  *ngIf="mensaje.tipo ==  '4'">
+                      <audio controls src="http://192.168.43.146:3333{{mensaje.mensaje}}"></audio>
+                    </div>
+                    <div align="left">
+                        <h3>{{mensaje.created_at}}</h3>
+                    </div>
+              </div>
+            </div>
+        
+            <div  *ngIf="mensaje.tipo ==  '1'">
+          <div class="speech-bubble" align="right">
+              <h2>{{parti.username}}  </h2>
+              {{mensaje.mensaje}}  
+              <div align="left">
+              <h3>{{mensaje.created_at}}</h3>
+          </div>
+          </div>
+        </div>
+
+        </div>
+      </div>
+   </div>
+
+
+   <div  *ngIf="mensaje.from ==  up.id"> 
+
+      <div  *ngIf="mensaje.tipo !=  '1'">
+          <div class="speech-bubbleneg2" align="left"> 
+          <div  *ngIf="mensaje.tipo ==  '2'">
+              
+              <img style="    width: 16rem;
+              border-radius: 1rem;" src="http://192.168.43.146:3333{{mensaje.mensaje}}"
+               alt="imagen"/>
+          </div>
+      
+          <div  *ngIf="mensaje.tipo ==  '3'">
+            
+               <video controls src="http://192.168.43.146:3333{{mensaje.mensaje}}"></video>
+          </div>
+      
+          <div  *ngIf="mensaje.tipo ==  '4'">
+            
+            <audio controls src="http://192.168.43.146:3333{{mensaje.mensaje}}"></audio>
+          </div>
+      
+          <div align="right">
+              <h3>{{mensaje.created_at}}</h3>
+          </div>
+      
+        </div>
+        </div>
+
+        <div  *ngIf="mensaje.tipo ==  '1'">
+    <div class="speech-bubble2" align="left">
+        {{mensaje.mensaje}}  
+        <div align="right">
+            <h3>{{mensaje.created_at}}</h3>
+        </div>
+    </div> 
+  </div> 
+
+
+  </div>
+
+
+  </div>
+  </div>
+  </div>
+  
+  
+  
+  <br>
+  <form  novalidate>
+      <div class="form-group col-md-2" >
+       
+       <input type="text" id="from" name="from" class="form-control" 
+       [(ngModel)]="mensaje.from" placeholder="FROM" type="hidden" >
+    </div>
+    
+     <div class="form-group col-md-2">
+       <input type="text" id="to" name="to" class="form-control" 
+       [(ngModel)]="mensaje.to" placeholder="TO"  type="hidden" >
+     </div>
+    
+     <div class="form-group col-md-6">
+       <label >Mensaje</label>
+       <input type="text" id="mensaje" name="mensaje" class="form-control" 
+       [(ngModel)]="mensaje.mensaje"  (ngModelChange)="escrbiendo($event)" placeholder="mensaje" >
+     </div>
+    
+    <div class="form-group">
+    <button (click)="this.agregarusuario()"
+    class="btn btn btn-outline-dark btn-sm">Enviar</button>
+    </div>
+    </form>
+
+    <br>
+  <label >Enviar una imagen</label>
+  <form  novalidate>
+      <div class="form-group col-md-2" >
+       
+       <input type="text" id="from" name="from" class="form-control" 
+       [(ngModel)]="mensaje.from" placeholder="FROM" type="hidden">
+    </div>
+    
+     <div class="form-group col-md-2">
+       <input type="text" id="to" name="to" class="form-control" 
+       [(ngModel)]="mensaje.to" placeholder="TO" type="hidden">
+     </div>
+     <div class="form-group col-md-6">
+        <input [(ngModel)]="xe" id="mensaje" name="mensaje" class="form-control" type="file" accept="image/*" (change)="previewFile($event)"> 
+     </div>
+    <div class="form-group">
+    <button hidden="hidden" (click)="this.agregararchivo()"
+    class="btn btn btn-outline-dark btn-sm">Enviar</button>
+    </div>
+    </form>
+
+    <br>
+    <label >Enviar un video</label>
+    <form  novalidate>
+        <div class="form-group col-md-2" >
+         <input type="text" id="from" name="from" class="form-control"  [(ngModel)]="mensaje.from" placeholder="FROM" type="hidden">
+      </div>
+      
+       <div class="form-group col-md-2">
+         <input type="text" id="to" name="to" class="form-control"  [(ngModel)]="mensaje.to" placeholder="TO" type="hidden">
+       </div>
+       <div class="form-group col-md-6">
+          <input [(ngModel)]="xevideo" id="mensaje" name="mensaje" class="form-control" type="file" accept="video/*" (change)="previewFileV($event)"> 
+       </div>
+      <div class="form-group">
+      <button hidden="hidden" (click)="this.agregarvideo()" class="btn btn btn-outline-dark btn-sm">Enviar</button>
+      </div>
+      </form>
+
+      <br>
+      <label >Enviar un audio</label>
+      <form  novalidate>
+          <div class="form-group col-md-2" >
+           <input type="text" id="from" name="from" class="form-control"  [(ngModel)]="mensaje.from" placeholder="FROM" type="hidden">
+        </div>
+        
+         <div class="form-group col-md-2">
+           <input type="text" id="to" name="to" class="form-control"  [(ngModel)]="mensaje.to" placeholder="TO" type="hidden">
+         </div>
+         <div class="form-group col-md-6">
+            <input [(ngModel)]="xeaudio" id="mensaje" name="mensaje" class="form-control" type="file" accept="audio/*" (change)="previewFileA($event)"> 
+         </div>
+        <div class="form-group">
+        <button hidden="hidden" (click)="this.agregaraudio()" class="btn btn btn-outline-dark btn-sm">Enviar</button>
+        </div>
+        </form>
+       
